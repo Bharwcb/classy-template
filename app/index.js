@@ -2,9 +2,20 @@ require('dotenv').config();
 const rp = require("request-promise");
 const _ = require('lodash');
 
+let auth_options = {
+	uri: "https://api.classy.org/oauth2/auth",
+	body: {
+		"grant_type": "client_credentials",
+		"client_id": process.env.CLASSY_KEY,
+		"client_secret": process.env.CLASSY_SECRET
+	}
+}
+
 function request_access_token() {
+	console.log("here");
 	rp(auth_options)
 	.then((res) => {
+		console.log("Token: ", res);
 		// save access token to .env
 	})
 	.catch((err) => {
