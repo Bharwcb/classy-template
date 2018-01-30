@@ -18,6 +18,9 @@ function request_access_token() {
 	rp(auth_options)
 	.then((res) => {
 		access_token = res.access_token;
+
+		// any API requests
+		fetch_campaign_transactions();
 	})
 	.catch((err) => {
 		console.log("Error requesting access token: ", err);
@@ -25,10 +28,15 @@ function request_access_token() {
 }
 
 function fetch_campaign_transactions() {
-	console.log("fetch_campaign_transactions");
+
+	console.log("access token: ", access_token);
 }
 
-request_access_token()
+request_access_token();
+
+
+
+
 
 
 // let total_transactions = [];
