@@ -13,28 +13,38 @@ let auth_options = {
 	json: true
 }
 
+// Apparently can do this:
+// function access_token() {
+//     return rp(auth_options)
+// }
+
 function access_token() {  
 	return new Promise(function(resolve, reject){
 		rp(auth_options)
 		.then((res) => {
-			console.log("get here?");
 			resolve(res.access_token);
 		})
 		.catch((err) => {
 			console.log("Error requesting access token: ", err);
+			reject("Error requesting access token: ", err);
 		})
 	});
 }
 
-// function fetch_campaign_transactions() {
-// 	console.log("access token: ", access_token);
-// }
-
-access_token().then((res) => {
+access_token()
+.then((res) => {
 	console.log("res: ", res);
+})
+.catch((err) => {
+	console.log("err: ", err);
 })
 
 
+
+
+// function fetch_campaign_transactions() {
+// 	console.log("access token: ", access_token);
+// }
 
 // let total_transactions = [];
 
