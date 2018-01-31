@@ -13,29 +13,26 @@ let auth_options = {
 	json: true
 }
 
-let access_token;
-function request_access_token() {
-	rp(auth_options)
-	.then((res) => {
-		access_token = res.access_token;
-
-		// any API requests
-		fetch_campaign_transactions();
-	})
-	.catch((err) => {
-		console.log("Error requesting access token: ", err);
-	})
+function access_token() {  
+	return new Promise(function(resolve, reject){
+		rp(auth_options)
+		.then((res) => {
+			console.log("get here?");
+			resolve(res.access_token);
+		})
+		.catch((err) => {
+			console.log("Error requesting access token: ", err);
+		})
+	});
 }
 
-function fetch_campaign_transactions() {
+// function fetch_campaign_transactions() {
+// 	console.log("access token: ", access_token);
+// }
 
-	console.log("access token: ", access_token);
-}
-
-request_access_token();
-
-
-
+access_token().then((res) => {
+	console.log("res: ", res);
+})
 
 
 
